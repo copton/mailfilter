@@ -1,0 +1,13 @@
+DEFAULT=$HOME/Maildir/
+LOGFILE=$DEFAULT/procmail.log
+
+:0fw
+| mailfilter.py
+
+:0 H
+* X-Mailfiter-Discard:
+/dev/null
+
+:0 H
+* X-Mailfilter-Mailbox: \/.*
+.$MATCH/
