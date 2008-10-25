@@ -41,7 +41,7 @@ def esc(s):
 class filter(object):
 
     def __init__(self, header, value, target=None):
-        self.header = re.compile(header)
+        self.header = re.compile(header, re.IGNORECASE)
         self.value = re.compile(value)
         if target is None:
             self.function = None
