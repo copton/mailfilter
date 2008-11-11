@@ -25,7 +25,7 @@ __version__ = '0.1'
 import sys
 import os
 import re
-import email
+import email.Header
 
 DISCARD_HEADER = 'X-Mailfilter-Discard'
 MAILBOX_HEADER = 'X-Mailfilter-Mailbox'
@@ -71,6 +71,7 @@ def discard(header, value):
 def apply_filter(msg):
     for filter in filters:
         for header, value in msg.items():
+            header = email.Header.decode_header(header)[0][0]
             if filter.header.match(header):
                 mo = filter.value.search(value)
                 if mo:
