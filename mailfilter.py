@@ -71,7 +71,7 @@ def discard(header, value):
 def apply_filter(msg):
     for filter in filters:
         for header, value in msg.items():
-            value = email.Header.decode_header(value)[0][0]
+            value = ' '.join(part[0] for part in email.header.decode_header(value))
             if filter.header.match(header):
                 mo = filter.value.search(value)
                 if mo:
