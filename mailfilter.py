@@ -67,7 +67,7 @@ def discard(header, value):
     filter(header, value)(lambda mo: None)
 
 
-def apply_filter(msg):
+def apply_filters(msg):
     for filter in filters:
         for header, value in msg.items():
             value = email.Header.decode_header(value)[0][0]
@@ -91,5 +91,5 @@ for filter in pending:
 msg = email.message_from_file(sys.stdin)
 del msg[MAILBOX_HEADER]
 del msg[DISCARD_HEADER]
-apply_filter(msg)
+apply_filters(msg)
 sys.stdout.write(msg.as_string())
